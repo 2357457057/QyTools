@@ -41,7 +41,6 @@ public class MainView {
             10,
             TimeUnit.SECONDS,
             new LinkedBlockingDeque<Runnable>(2));*/
-
     static {
         try {
             robot = new Robot();
@@ -79,32 +78,7 @@ public class MainView {
         //top VBOX
 
 
-        MenuItem loginItem = new MenuItem("登录");
-        MenuItem signItem = new MenuItem("注册");
-        MenuItem official_website = new MenuItem("官网");
-        official_website.setOnAction(event -> {
-            Stage popStage = new Stage();
-            BorderPane borderPane = new BorderPane();
-            Scene scene = new Scene(borderPane, 1024, 512);
-            WebView browser = new WebView();
-            WebEngine webEngine = browser.getEngine();
 
-            webEngine.load("http://yqingyu.top/");
-            borderPane.setCenter(browser);
-            popStage.setScene(scene);
-            popStage.initModality(Modality.APPLICATION_MODAL);
-            popStage.show();
-            popStage.setTitle("轻语QYQ");
-        });
-
-        MenuBar menuBar = FxBuild.buildMenuBar("登录", loginItem, signItem, official_website);
-
-        FxBuild.menuBarAdd(menuBar, "文件", "New", "Open", "Save", "Exit");
-        FxBuild.menuBarAdd(menuBar, "编辑", "Copy", "Cut", "Paste", "Delete");
-        FxBuild.menuBarAdd(menuBar, "工具", "Jdk", "Jre", "Update");
-        menuBar.setPadding(new Insets(0, 0, 0, 0));
-
-        menuBar.setOpacity(0.75);
 
         // button
         Button send = new Button("             ");
@@ -280,7 +254,6 @@ public class MainView {
         });
 
 
-        root.setTop(menuBar);
         root.setCenter(vBox);
 
     }
