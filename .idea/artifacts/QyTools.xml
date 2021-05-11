@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="QyTools">
+    <output-path>$PROJECT_DIR$/out/artifacts/QyTools</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="alias" value="" />
+        <option name="appClass" value="com.qy.Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="keystore" value="" />
+        <option name="title" value="QyTools" />
+        <option name="vendor" value="qingyu" />
+        <option name="version" value="2.1.1" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="QyTools.jar">
+        <element id="module-output" name="QyTools" />
+      </element>
+    </root>
+  </artifact>
+</component>
