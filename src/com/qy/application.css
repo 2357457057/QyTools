@@ -1,0 +1,12 @@
+.context{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-padding: 10 10 0 10;
+}
+
+.context2{
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-padding: 30 10 0 10;
+}
+
