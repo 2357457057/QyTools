@@ -1,0 +1,10 @@
+#btnVb {
+    -fx-spacing: 5;
+    -fx-border-color: #000000;
+    -fx-border-width: 1px;
+}
+
+#pathLb,#pathTF,#oldExtensionLb,#oldExtensionTF,#newExtensionLb,#newExtensionTF,#radioHBox,#submit,#pathBtn{
+    -fx-translate-y: 10;
+    -fx-translate-x: 10;
+}
