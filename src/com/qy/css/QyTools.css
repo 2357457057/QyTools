@@ -4,9 +4,12 @@
     -fx-border-width: 1px;
 }
 
-#pathLb,#pathTF,#oldExtensionLb,#oldExtensionTF,#newExtensionLb,#newExtensionTF,#radioHBox{
+#pathLb,#oldExtensionLb,#newExtensionLb,#radioHBox{
     -fx-opacity: 0.8;
     -fx-text-fill: white;
+}
+#pathTF,#oldExtensionTF,#newExtensionTF{
+    -fx-opacity: 0.8;
 }
 #pathBtn{
     -fx-opacity: 0.8;

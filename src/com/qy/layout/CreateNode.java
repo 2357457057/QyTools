@@ -10,8 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -79,12 +77,13 @@ public class CreateNode {
         rBtn2.setSelected(true);
 
 
+        AtomicReference<File> fileChosen = new AtomicReference<>();
         Button pathBtn = new Button();
         pathBtn.setOnAction(event -> {
             Main.GLOBAL_INFO_STATION.appendText("\n[info]" + "选择文件");
             FileChooser filechooser = new FileChooser();
-            File file = filechooser.showOpenDialog(Main.primaryStage);
-            kkk(pathBtn, file);
+            fileChosen.set(filechooser.showOpenDialog(Main.primaryStage));
+            kkk(pathBtn, fileChosen.get());
         });
 
         pathBtn.setId("pathBtn");
@@ -94,10 +93,12 @@ public class CreateNode {
         group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             String_File = null;
             if (rBtn1.isSelected()) {
+
                 oldExtensionTF.setDisable(true);
                 Main.GLOBAL_INFO_STATION.appendText("\n[info]" + "当前功能:[单一文件修改]");
                 FileChooser filechooser = new FileChooser();
                 File file = filechooser.showOpenDialog(Main.primaryStage);
+                fileChosen.set(file);
                 gridPane.getChildren().remove(pathTF);
                 kkk(pathBtn, file);
                 if (!flag.get())
@@ -140,9 +141,10 @@ public class CreateNode {
             }
             if (rBtn2.isSelected()) {
                 Main.GLOBAL_INFO_STATION.appendText("\n[info]" + "当前功能:[当前路径文件修改]");
-               fileExtensionModify.currentPathModify(pathTF.getText(),oldExtensionTF.getText(),newExtensionTF.getText());
+               fileExtensionModify.currentPathModify(new File(pathTF.getText().trim()) ,oldExtensionTF.getText(),newExtensionTF.getText());
             }
             if (rBtn3.isSelected()) {
+                fileExtensionModify.currentPathRecursiveModify(new File(pathTF.getText().trim()) ,oldExtensionTF.getText(),newExtensionTF.getText());
                 System.out.println("当前路径多文件修改");
             }
         });

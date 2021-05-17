@@ -19,11 +19,15 @@ import javafx.stage.Stage;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Main extends Application {
-    final static public TextArea GLOBAL_INFO_STATION = new TextArea("日志信息台");
+    static public TextArea GLOBAL_INFO_STATION;
     static public Stage primaryStage = null;
     private final BuildNodeUtils FxBuild = new BuildNodeUtils();
 
-    static {
+
+    @Override
+    public void start(Stage primaryStage) {
+
+        GLOBAL_INFO_STATION = new TextArea("日志信息台");
         //设置透明度
         GLOBAL_INFO_STATION.setOpacity(0.7);
         //不可编辑
@@ -33,10 +37,6 @@ public class Main extends Application {
         GLOBAL_INFO_STATION.setMinSize(526.0, 120.0);
         //GLOBAL_INFO_STATION.setMaxHeight();
         GLOBAL_INFO_STATION.setPrefSize(526.0, 120.0);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
 
         BorderPane AutoSentView = new BorderPane();
 
@@ -146,7 +146,9 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
         launch(args);
+
     }
 
 

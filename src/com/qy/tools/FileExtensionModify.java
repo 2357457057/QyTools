@@ -5,7 +5,12 @@ import com.qy.Main;
 import javafx.scene.control.Alert;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 public class FileExtensionModify {
 
@@ -62,9 +67,9 @@ public class FileExtensionModify {
     }
 
 
-    public void currentPathModify(String filePath, String oldExtension, String newExtension) {
+    public void currentPathModify(File file, String oldExtension, String newExtension) {
 
-        File file = new File(filePath);
+
         //判断是否为一个文件夹
         if (file.isDirectory()) {
             //文件过滤器
@@ -86,14 +91,14 @@ public class FileExtensionModify {
             //当返回值不为nul1时
             if (files != null) {
                 Main.GLOBAL_INFO_STATION.appendText("n" + "[info]共找到 >" + files.length + "<个匹的文件 ");
-                // 当未填写旧拓展名时
+               // 当未填写旧拓展名时
                 if (oldExtension.trim().length() == 0) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+/*                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setContentText("警告!当前未填写旧拓展名 将全修改当前目录下所有文件!");
                     // 不能直接用show show是非阻基的 showAndWait是阻塞的
                     alert.showAndWait();
                     //警告框客户的选择
-                    if (alert.getResult().getText().equals("确定") || alert.getResult().getText().equalsIgnoreCase("ok")) {
+                    if (alert.getResult().getText().equals("确定") || alert.getResult().getText().equalsIgnoreCase("ok")) {*/
 
                         for (File file1 : files) {
                             //判断为非文件夹
@@ -121,7 +126,7 @@ public class FileExtensionModify {
                                     //新拓展名已填写
                                     if (newExtension.trim().length() != 0) {
                                         Main.GLOBAL_INFO_STATION.appendText("\n[warning] 当前文件无拓展名现将为其添加拓展名");
-                                        File file2 = new File(file1.getPath() +"."+ newExtension.trim());
+                                        File file2 = new File(file1.getPath() + "." + newExtension.trim());
                                         boolean b = file1.renameTo(file2);
                                         if (b) {
                                             Main.GLOBAL_INFO_STATION.appendText("\n[info] 修改成功" + "新文件名" + file2.getName() + " 原文件名:" + file1.getName());
@@ -134,9 +139,9 @@ public class FileExtensionModify {
                                 }
                             }
                         }
-                    } else {
+                  /*  } else {
                         Main.GLOBAL_INFO_STATION.appendText("\n[info] 用户取消修改");
-                    }
+                    }*/
 
                 } else {
                     for (File file1 : files) {
@@ -184,6 +189,19 @@ public class FileExtensionModify {
         }
     }
 
-    public void currentPathRecursiveModify(String filePath, String oldExtension, String newExtension) {
+    public void currentPathRecursiveModify(File filePath, String oldExtension, String newExtension) {
+        ArrayList<File> list = new ArrayList<>();
+        for (File file : recursiveQuery(filePath, list)) {
+            currentPathModify(file, oldExtension, newExtension);
+        }
+
+
+    }
+
+    List<File> recursiveQuery(File fileRoot, List<File> dirList) {
+        File[] files = fileRoot.listFiles(File::isDirectory);
+        if (files != null)
+            dirList.addAll(Arrays.asList(files));
+        return dirList;
     }
 }
